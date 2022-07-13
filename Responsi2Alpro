@@ -1,0 +1,185 @@
+//Ghaitsa Zahira Rahma
+//D-2100018206
+//Alpro Rabu, 10:30
+#include<iostream>
+#include<string>
+#include<cmath>
+using namespace std;
+
+class Coba{
+	public:
+		void input();	
+		void Asce();
+		void Desce();
+		void output();
+		int Search(string x[],string target[],int low,int high);
+	private:
+		int low,high,hasil;
+		int banyak_data,i,j,k,sort;
+		int d,e;
+		string a,b;
+		string c,target[30];
+		string x[30];
+		int stok[30], terjual[30],tahun;
+		string id[30],judul[30],bulan,penulis[30];
+};
+
+void Coba::input(){
+	cout<<"Inputkan banyak data : ";
+	cin>>banyak_data;
+	for(i=0;i<banyak_data;i++){
+		cout<<"Inputkan ID	: ";
+		cin>>id[i];
+		cin.ignore();
+		cout<<"Inputkan Judul	: ";
+		getline(cin,judul[i]);
+		cout<<"Inputkan Penulis	: ";
+		getline(cin,penulis[i]);
+		cout<<"Inputkan Stok	: ";
+		cin>>stok[i];
+		cout<<"Inputkan Jumlah Terjual	: ";
+		cin>>terjual[i];
+	}
+	cout<<"Bulan	: ";
+	cin>>bulan;
+	cout<<"Tahun	: ";
+	cin>>tahun;
+}
+
+//sorting ascending
+void Coba::Asce(){
+	for(i=0;i<banyak_data;i++){
+		for(j=0;j<banyak_data-1;j++){
+			if(stok[j]>stok[j+1]){
+				//UNTUK ID
+				a=id[j];
+				id[j]=id[j+1];
+				id[j+1]=a;
+				//UNTUK JUDUL
+				b=judul[j];
+				judul[j]=judul[j+1];
+				judul[j+1]=b;
+				//UNTUK PENULIS
+				c=penulis[j];
+				penulis[j]=penulis[j+1];
+				penulis[j+1]=c;
+				//UNTUK STOK
+				d=stok[j];
+				stok[j]=stok[j+1];
+				stok[j+1]=d;
+				//UNTUK TERJUAL
+				e=terjual[j];
+				terjual[j]=terjual[j+1];
+				terjual[j+1]=e;
+			}
+		}
+	}
+}
+
+//sorting descending
+void Coba::Desce(){
+	for(i=0;i<banyak_data;i++){
+		for(j=0;j<banyak_data-1;j++){
+			if(stok[j]<stok[j+1]){
+				//UNTUK ID
+				a=id[j];
+				id[j]=id[j+1];
+				id[j+1]=a;
+				//UNTUK JUDUL
+				b=judul[j];
+				judul[j]=judul[j+1];
+				judul[j+1]=b;
+				//UNTUK PENULIS
+				c=penulis[j];
+				penulis[j]=penulis[j+1];
+				penulis[j+1]=c;
+				//UNTUK STOK
+				d=stok[j];
+				stok[j]=stok[j+1];
+				stok[j+1]=d;
+				//UNTUK TERJUAL
+				e=terjual[j];
+				terjual[j]=terjual[j+1];
+				terjual[j+1]=e;
+			}
+		}
+	}
+}
+
+void Coba::output(){
+	cout<<endl;
+	cout<<"Pilih metode sorting"<<endl;
+	cout<<"1. Ascending"<<endl;
+	cout<<"2. Descending"<<endl;
+	cout<<"Input metode sorting	: ";
+	cin>>sort;
+	if(sort==1){
+		Asce();
+	}
+	else if(sort==2){
+		Desce();
+	}
+	cout<<endl;
+	cout<<"\t\t\t\tTAMPILAN RESPONSI 2 CODE SOAL E"<<endl;
+	cout<<"Bulan	: "<<bulan<<" "<<tahun<<endl;
+	cout<<"-------------------------------------------------------------------------------------------------"<<endl;
+	cout<<"|\tID\t\tJudul\t\t\tPenulis\t\t\tStok\t\tTerjual\t|"<<endl;
+	cout<<"-------------------------------------------------------------------------------------------------"<<endl;
+	for(i=0;i<banyak_data;i++){
+		cout<<"|\t"<<id[i]<<"\t\t"<<judul[i]<<"\t\t"<<penulis[i]<<"\t\t"<<stok[i]<<"\t\t"<<terjual[i]<<"\t|"<<endl;
+	}
+	cout<<"|_______________________________________________________________________________________________|"<<endl;
+	
+	cout<<endl;
+	cout<<"\t\t\tSEARCHING"<<endl;
+	cout<<endl;
+	
+	cin.ignore();
+	cout<<"Input penulis dari data yang ingin dicari	: ";
+	getline(cin,target[30]);
+	low=0;
+	high=banyak_data-1;
+	
+	hasil=Search(penulis,target,low,high);
+	if(hasil== -1){
+		cout<<"Data ga nemu"<<endl;
+	}
+	else{
+		cout<<"Ditemukan : "<<endl;
+		for(i=0;i<banyak_data;i++){
+			if(penulis[i]==target[30]){
+			cout<<"ID	: "<<id[i]<<endl;
+			cout<<"Judul	: "<<judul[i]<<endl;
+			cout<<"Penulis	: "<<penulis[i]<<endl;
+			cout<<"Stok	: "<<stok[i]<<endl;
+			cout<<"Terjual	: "<<terjual[i]<<endl;		
+			}	
+			cout<<endl;	
+		}
+	
+	}
+	}
+
+int Coba::Search(string x[],string target[],int low,int high){
+	while(low<=high){
+		int mid;
+		mid = low + (high - low )/2;
+		if(x[mid]==target[30]){
+			return mid;
+		}
+		else if(x[mid]<target[30]){
+			low = mid + 1;
+		}
+		else{
+			high = mid - 1;
+		}
+	}
+	return -1;
+}
+
+int main(){
+	Coba x;
+	x.input();
+	x.output();
+	return 0;
+}
